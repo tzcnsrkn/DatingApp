@@ -25,8 +25,8 @@ namespace DatingApp.API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)        
-        {            
+        public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
+        {
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
             if (await _repo.UserExists(userForRegisterDto.Username))
                 return BadRequest("Username already exists !");
@@ -58,7 +58,7 @@ namespace DatingApp.API.Controllers
             .GetBytes(_config.GetSection("AppSettings:Token").Value));
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-            
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
